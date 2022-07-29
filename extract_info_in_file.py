@@ -12,7 +12,6 @@ def read(file):
     Returns
     -------
     content : str
-
     """
     my_file = open(file,"r")
     content = my_file.read()
@@ -31,7 +30,6 @@ def split_to_the_line(content):
     -------
     content_list : lst
         Split return to line txt
-
     """
     content_list = content.split("\n")
     return content_list
