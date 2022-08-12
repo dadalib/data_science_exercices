@@ -62,6 +62,24 @@ def count_nb_sx_score(sx_scores):
     plt.title("Number of girl regrouped by sx score ")
     plt.show()
 
+def sx_score_and_girls_weights(sx_scores,weights,nationalities):
+    # Make the points
+    plt.scatter(sx_scores,weights)
+    for nationality, sx_score_count, weight_count in zip(nationalities,sx_scores,weights):
+        plt.annotate(nationality,
+        # label the point
+        xy=(sx_score_count,weight_count),
+        # delay
+        xytext=(5,-5),
+        textcoords='offset points')
+
+    plt.title("Weight/Sexe score")
+    plt.xlabel("Sexe Score")
+    plt.ylabel("Weight Scale")
+    plt.show()
+
+    
+
 
 
 
@@ -73,11 +91,27 @@ if __name__ == "__main__":
     # Files names
     FILE_SX_SCORE ="sx_score.txt"
     FILE_YEARS = "years.txt"
+    FILE_NATIONALITIES = "nationalities.txt"
+    FILE_WEIGHTS = "weight.txt"
+    
 
     # Extract files content
+    # Sexe Score
     sx_score_content = extract_info_in_file.read(FILE_SX_SCORE)
     sx_score_split_new_line = extract_info_in_file.split_to_the_line(sx_score_content)
     print(len(sx_score_split_new_line))
+
+    # Nationalities
+    nationalities_content = extract_info_in_file.read(FILE_NATIONALITIES)
+    nationalities_split_new_line = extract_info_in_file.split_to_the_line(nationalities_content)
+    print(len(nationalities_split_new_line))
+
+    # Weight
+    weight_content = extract_info_in_file.read(FILE_WEIGHTS)
+    weight_split_new_line = extract_info_in_file.split_to_the_line(weight_content)
+    print(len(weight_split_new_line))
+
+    # Years
     years_content = extract_info_in_file.read(FILE_YEARS)
     years_split_new_line = extract_info_in_file.split_to_the_line(years_content)
     years_split_new_line.sort()
@@ -86,4 +120,6 @@ if __name__ == "__main__":
     # TODO make the cast at the fonction level    
     #sx_score_through_time_sc(list(map(int, sx_score_split_new_line)),years_split_new_line)
     #sx_score_through_time_br(list(map(int, sx_score_split_new_line)),years_split_new_line)
-    count_nb_sx_score(list(map(int, sx_score_split_new_line)))
+    #count_nb_sx_score(list(map(int, sx_score_split_new_line)))
+
+    sx_score_and_girls_weights(list(map(int, sx_score_split_new_line)),list(map(int,weight_split_new_line )),nationalities_split_new_line)
